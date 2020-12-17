@@ -4,7 +4,7 @@
       <span>产污-治污逻辑关系图</span>
     </div>
     <div class="content">
-      <div class="dicribe">
+      <div class="discribe">
         <XlFlowDis />
       </div>
       <div class="flow">
@@ -209,6 +209,12 @@ export default {
 }
 .content {
   position: relative;
+  .discribe {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
   .flow {
       background-color: #E4EDEF;
       width: 98vw;

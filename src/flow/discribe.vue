@@ -23,9 +23,6 @@ export default {
 
 <style lang="scss" scoped>
 .flow-dis {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     .item {
         display: flex;
         align-items: center;
