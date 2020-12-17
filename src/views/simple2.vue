@@ -219,7 +219,7 @@ export default {
       background-color: #E4EDEF;
       width: 98vw;
       margin: 0 auto;
-      height: 500px;
+      height: 60vh;
       position: relative;
       padding: 30px 0;
   }
