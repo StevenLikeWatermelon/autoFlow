@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <!-- <div id="nav">
+      <router-link to="/simple1">5层流程</router-link> |
+      <router-link to="/simple2">三层流程 分组包裹</router-link> |
+      <router-link to="/simple3">全场废气通用</router-link> |
+    </div> -->
     <router-view/>
   </div>
 </template>
