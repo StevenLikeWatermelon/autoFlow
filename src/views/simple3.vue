@@ -1,10 +1,10 @@
 <template>
   <div class="wrap">
     <div class="title">
-      <span>示意图2</span>
+      <span>产污-治污逻辑关系图(包含全产设备)</span>
     </div>
     <div class="content">
-      <div class="dicribe">
+      <div class="discribe">
         <XlFlowDis />
       </div>
       <div class="flow">
@@ -27,55 +27,54 @@ export default {
       nodeDataArray: [
         {
           key: 1,
-          icon: 'water',
-          portHeight: 20,
+          icon: 'gas',
           color: 'orange',
-          pos: '0 0',
-          text: '生产污水',
-          description: '生产污水的一些描述信息'
+          pos: '103 0',
+          text: '生产废气',
+          description: '生产废气的一些描述信息'
         },
         {
           key: 2,
-          text: '生产污水处理\n一开两备',
+          text: '生产废气处理(一开两备)',
           isGroup: true
         },
         {
           key: 3,
           icon: 'wind',
           color: 'green',
-          pos: '300 -120',
-          text: '一级提升泵1#',
+          pos: '-100 200',
+          text: '车间鼓风机1#',
           group: 2,
-          description: '一级提升泵1#的一些描述信息'
+          description: '车间鼓风机1#的一些描述信息'
         },
         {
           key: 4,
           icon: 'wind',
           color: 'grey',
-          pos: '300 0',
+          pos: '100 200',
           group: 2,
-          text: '一级提升泵2#',
-          description: '一级提升泵2#的一些描述信息'
+          text: '车间鼓风机2#',
+          description: '车间鼓风机2#的一些描述信息'
         },
         {
           key: 5,
           icon: 'wind',
           color: 'purple',
-          pos: '300 120',
-          text: '全厂废气治理',
+          pos: '300 200',
+          text: '全厂通用鼓风机',
           group: 2,
-          description: '全厂废气治理的一些描述信息'
+          description: '全厂通用鼓风机的一些描述信息'
         },
         {
           key: 6,
-          text: '分组2\n一开一备',
+          text: '分组2(一开一备)',
           isGroup: true
         },
         {
           key: 7,
           icon: 'wind',
           color: 'green',
-          pos: '600 -800',
+          pos: '-800 500',
           group: 6,
           text: '预曝气鼓风机1#',
           description: '预曝气鼓风机1#的一些描述信息'
@@ -84,53 +83,53 @@ export default {
           key: 8,
           icon: 'wind',
           color: 'purple',
-          pos: '600 -650',
+          pos: '-600 500',
           group: 6,
-          text: '全厂废气治理',
-          description: '全厂废气治理的一些描述信息'
+          text: '全厂通用鼓风机',
+          description: '全厂通用鼓风机的一些描述信息'
         },
         {
           key: 9,
-          text: '分组3\n一开两备',
+          text: '分组3(一开两备)',
           isGroup: true
         },
         {
           key: 10,
           icon: 'wind',
           color: 'green',
-          pos: '600 -450',
+          pos: '-400 500',
           group: 9,
-          text: '二级提升泵1#',
-          description: '二级提升泵1#的一些描述信息'
+          text: '二级鼓风机1#',
+          description: '二级鼓风机1#的一些描述信息'
         },
         {
           key: 11,
           icon: 'wind',
           color: 'grey',
-          pos: '600 -330',
+          pos: '-200 500',
           group: 9,
-          text: '二级提升泵2#',
-          description: '二级提升泵2#的一些描述信息'
+          text: '二级鼓风机2#',
+          description: '二级鼓风机2#的一些描述信息'
         },
         {
           key: 12,
           icon: 'wind',
-          color: 'purple',
-          pos: '600 -230',
+          color: 'grey',
+          pos: '0 500',
           group: 9,
-          text: '全厂废气治理',
-          description: '全厂废气治理的一些描述信息'
+          text: '全厂通用鼓风机',
+          description: '全厂通用鼓风机的一些描述信息'
         },
         {
           key: 13,
-          text: '分组4\n一开两备',
+          text: '分组4(一开两备)',
           isGroup: true
         },
         {
           key: 14,
           icon: 'wind',
           color: 'grey',
-          pos: '600 0',
+          pos: '200 500',
           group: 13,
           text: '罗茨鼓风机1#',
           description: '罗茨鼓风机1#的一些描述信息'
@@ -139,7 +138,7 @@ export default {
           key: 15,
           icon: 'wind',
           color: 'green',
-          pos: '600 120',
+          pos: '400 500',
           group: 13,
           text: '罗茨鼓风机2#',
           description: '罗茨鼓风机2#的一些描述信息'
@@ -148,10 +147,38 @@ export default {
           key: 16,
           icon: 'wind',
           color: 'purple',
-          pos: '600 240',
-          text: '全厂废气治理',
+          pos: '600 500',
+          text: '全厂通用鼓风机',
           group: 13,
-          description: '全厂废气治理的一些描述信息'
+          description: '全厂通用鼓风机的一些描述信息'
+        },
+        {
+          key: 17,
+          text: '分组5',
+          isGroup: true
+        },
+        {
+          key: 18,
+          icon: 'wind',
+          color: 'purple',
+          pos: '800 500',
+          group: 17,
+          text: '全厂通用鼓风机',
+          description: '全厂通用鼓风机的一些描述信息'
+        },
+        {
+          key: 19,
+          text: '分组6',
+          isGroup: true
+        },
+        {
+          key: 20,
+          icon: 'wind',
+          color: 'purple',
+          pos: '1000 500',
+          group: 19,
+          text: '全厂通用鼓风机',
+          description: '全厂通用鼓风机的一些描述信息'
         }
       ],
       linkDataArray: [
@@ -173,17 +200,28 @@ export default {
 
 <style lang="scss" scoped>
 .title {
-    font-size: 20px;
+    font-size: 30px;
     width: 100vw;
     margin-bottom: 30px;
     text-align: center;
+    font-weight: 700;
+    color: #29303F;
 }
 .content {
+  position: relative;
+  .discribe {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
   .flow {
-      border: 1px solid black;
-      width: 1220px;
-      height: 830px;
+      background-color: #E4EDEF;
+      width: 98vw;
+      margin: 0 auto;
+      height: 60vh;
       position: relative;
+      padding: 30px 0;
   }
 }
 </style>
