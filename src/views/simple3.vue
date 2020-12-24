@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="title">
-      <span>产污-治污逻辑关系图(包含全产设备)</span>
+      <span>产污-治污逻辑关系图</span>
     </div>
     <div class="content">
       <div class="discribe">
@@ -26,44 +26,60 @@ export default {
     return {
       nodeDataArray: [
         {
-          key: 1,
-          icon: 'gas',
+          key: 0,
+          icon: 'water',
           color: 'orange',
-          pos: '103 0',
-          text: '生产废气',
-          description: '生产废气的一些描述信息'
+          pos: '20 0',
+          text: '密1#',
+          group: 22,
+          description: '密1#的一些描述信息'
+        },
+        {
+          key: 1,
+          icon: 'water',
+          color: 'orange',
+          pos: '180 0',
+          text: '密2#',
+          group: 22,
+          description: '密2#的一些描述信息'
         },
         {
           key: 2,
-          text: '生产废气处理(一开两备)',
+          text: '生产污水处理(一开两备)',
+          isGroup: true,
+          group: 22
+        },
+        {
+          key: 22,
+          text: '总体变成产污单元',
           isGroup: true
         },
         {
           key: 3,
-          icon: 'wind',
+          icon: 'pump',
           color: 'green',
           pos: '-100 200',
-          text: '车间鼓风机1#',
+          text: '一级提升泵1#',
           group: 2,
-          description: '车间鼓风机1#的一些描述信息'
+          description: '一级提升泵1#的一些描述信息'
         },
         {
           key: 4,
-          icon: 'wind',
+          icon: 'pump',
           color: 'grey',
           pos: '100 200',
           group: 2,
-          text: '车间鼓风机2#',
-          description: '车间鼓风机2#的一些描述信息'
+          text: '一级提升泵2#',
+          description: '一级提升泵2#的一些描述信息'
         },
         {
           key: 5,
-          icon: 'wind',
-          color: 'purple',
+          icon: 'pump',
+          color: 'grey',
           pos: '300 200',
-          text: '全厂通用鼓风机',
+          text: '一级提升泵3#',
           group: 2,
-          description: '全厂通用鼓风机的一些描述信息'
+          description: '一级提升泵3#的一些描述信息'
         },
         {
           key: 6,
@@ -72,7 +88,7 @@ export default {
         },
         {
           key: 7,
-          icon: 'wind',
+          icon: 'bomb',
           color: 'green',
           pos: '-800 500',
           group: 6,
@@ -81,12 +97,12 @@ export default {
         },
         {
           key: 8,
-          icon: 'wind',
-          color: 'purple',
+          icon: 'bomb',
+          color: 'grey',
           pos: '-600 500',
           group: 6,
-          text: '全厂通用鼓风机',
-          description: '全厂通用鼓风机的一些描述信息'
+          text: '预曝气鼓风机2#',
+          description: '预曝气鼓风机2#的一些描述信息'
         },
         {
           key: 9,
@@ -95,30 +111,30 @@ export default {
         },
         {
           key: 10,
-          icon: 'wind',
+          icon: 'pump',
           color: 'green',
           pos: '-400 500',
           group: 9,
-          text: '二级鼓风机1#',
-          description: '二级鼓风机1#的一些描述信息'
+          text: '二级提升泵1#',
+          description: '二级提升泵1#的一些描述信息'
         },
         {
           key: 11,
-          icon: 'wind',
+          icon: 'pump',
           color: 'grey',
           pos: '-200 500',
           group: 9,
-          text: '二级鼓风机2#',
-          description: '二级鼓风机2#的一些描述信息'
+          text: '二级提升泵2#',
+          description: '二级提升泵2#的一些描述信息'
         },
         {
           key: 12,
-          icon: 'wind',
+          icon: 'pump',
           color: 'grey',
           pos: '0 500',
           group: 9,
-          text: '全厂通用鼓风机',
-          description: '全厂通用鼓风机的一些描述信息'
+          text: '二级提升泵3#',
+          description: '二级提升泵3#的一些描述信息'
         },
         {
           key: 13,
@@ -146,11 +162,11 @@ export default {
         {
           key: 16,
           icon: 'wind',
-          color: 'purple',
+          color: 'grey',
           pos: '600 500',
-          text: '全厂通用鼓风机',
+          text: '罗茨鼓风机3#',
           group: 13,
-          description: '全厂通用鼓风机的一些描述信息'
+          description: '罗茨鼓风机3#的一些描述信息'
         },
         {
           key: 17,
@@ -159,12 +175,12 @@ export default {
         },
         {
           key: 18,
-          icon: 'wind',
-          color: 'purple',
+          icon: 'guan',
+          color: 'green',
           pos: '800 500',
           group: 17,
-          text: '全厂通用鼓风机',
-          description: '全厂通用鼓风机的一些描述信息'
+          text: '2#加药计量泵',
+          description: '2#加药计量泵的一些描述信息'
         },
         {
           key: 19,
@@ -173,15 +189,16 @@ export default {
         },
         {
           key: 20,
-          icon: 'wind',
-          color: 'purple',
+          icon: 'guan',
+          color: 'green',
           pos: '1000 500',
           group: 19,
-          text: '全厂通用鼓风机',
-          description: '全厂通用鼓风机的一些描述信息'
+          text: '1#加药计量泵',
+          description: '1#加药计量泵的一些描述信息'
         }
       ],
       linkDataArray: [
+        { from: 0, to: 2 },
         { from: 1, to: 2 },
         { from: 2, to: 6 },
         { from: 2, to: 9 },
@@ -202,7 +219,7 @@ export default {
 .title {
     font-size: 30px;
     width: 100vw;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     text-align: center;
     font-weight: 700;
     color: #29303F;
@@ -219,7 +236,7 @@ export default {
       background-color: #E4EDEF;
       width: 98vw;
       margin: 0 auto;
-      height: 60vh;
+      height: 80vh;
       position: relative;
       padding: 30px 0;
   }
