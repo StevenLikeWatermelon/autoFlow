@@ -8,20 +8,16 @@ export const defaultColors = {
   pink: '#faadc1',
   purple: '#d689ff',
   orange: '#fdb400',
-  grey: '#a7a6a6'
+  grey: '#a7a6a6',
+  gas: '#98c16d',
+  water: '#5b9ad5'
 }
 export const discribeColor = [{
-  text: '运行',
-  color: defaultColors.green
+  text: '废水',
+  color: defaultColors.gas
 }, {
-  text: '停机',
-  color: defaultColors.red
-}, {
-  text: '停电',
-  color: defaultColors.lightred
-}, {
-  text: '未知',
-  color: defaultColors.grey
+  text: '废气',
+  color: defaultColors.water
 }]
 
 export const SvgIcon = {

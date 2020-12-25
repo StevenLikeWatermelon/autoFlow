@@ -4,9 +4,9 @@
       <span>产污-治污逻辑关系图</span>
     </div>
     <div class="content">
-      <!-- <div class="discribe">
+      <div class="discribe">
         <XlFlowDis />
-      </div> -->
+      </div>
       <div class="flow">
         <xl-flow :node-data-array="nodeDataArray" :link-data-array="linkDataArray" />
       </div>
@@ -15,12 +15,13 @@
 </template>
 
 <script>
+import { defaultColors } from '../flow/config'
 import XlFlow from '../flow/index'
-// import XlFlowDis from '../flow/discribe'
+import XlFlowDis from '../flow/discribe'
 export default {
   components: {
-    XlFlow
-    // XlFlowDis
+    XlFlow,
+    XlFlowDis
   },
   data () {
     return {
@@ -30,6 +31,7 @@ export default {
       childNodesLinkArr: [],
       deviceProductHeight: 0,
       devicePurityHeight: 0,
+      proGapPurity: 300,
       deviceDischargeHeight: 0,
       allpurityWidth: [],
       flowData: {
@@ -383,6 +385,10 @@ export default {
         }, {
           from: '260YF001',
           to: ['260PK001'],
+          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+        }, {
+          from: '260YF001',
+          to: ['260PK001'],
           pollutionType: 2 // pollutionType: 1表示废水 2表示废气
         }]
       }
@@ -472,9 +478,9 @@ export default {
       const maxChildrenLength = Math.max(...childrenLengthArr)
       let initDeviceWidth = 0
       if (maxChildrenLength > 1) {
-        initDeviceWidth = 250 * ((maxChildrenLength + 0.5) / 2)
+        initDeviceWidth = this.proGapPurity * ((maxChildrenLength + 0.5) / 2)
       } else {
-        initDeviceWidth = 250
+        initDeviceWidth = this.proGapPurity
       }
       // console.log(initDeviceWidth)
       this.devicePurityHeight = purifyLength === 1 ? this.deviceProductHeight / 2 - 70 : 0
@@ -594,7 +600,7 @@ export default {
       this.makePurityLink()
     },
     makeProductLink () {
-      this.noRepeatProductLinkArr.forEach(from => {
+      this.noRepeatProductLinkArr.forEach((from, index) => {
         const tempArr = from.split(',')
         const pollutionType = +tempArr.pop()
         tempArr.forEach(to => {
@@ -604,7 +610,10 @@ export default {
             routing: 'Orthogonal',
             fromSpot: 'Right',
             pollutionType,
-            stroke: pollutionType === 1 ? '#98c16d' : '#5b9ad5'
+            // fromEndSegmentLength: 50,
+            toEndSegmentLength: 30 * (index + 1),
+            stroke: pollutionType === 1 ? defaultColors.water : defaultColors.gas,
+            text: pollutionType === 1 ? '废水' : '废气'
           })
         })
       })
@@ -614,6 +623,7 @@ export default {
       purifyArr.forEach(item => {
         item.to = item.to[0]
         item.stroke = +item.pollutionType === 1 ? '#98c16d' : '#5b9ad5'
+        item.text = +item.pollutionType === 1 ? '废水' : '废气'
       })
       this.linkDataArray.push(...purifyArr)
       this.linkDataArray = this.linkDataArray.concat(this.childNodesLinkArr)
@@ -636,7 +646,7 @@ export default {
   .discribe {
     position: absolute;
     top: 20px;
-    right: 20px;
+    left: 20px;
     z-index: 9999;
   }
   .flow {

@@ -138,11 +138,17 @@ export default {
         go.Link,
         {
           routing: go.Link.AvoidsNodes,
-          curve: go.Link.JumpOver,
+          // curve: go.Link.Bezier,
           corner: 0,
+          curviness: 10,
+          // relinkableFrom: true,
+          // relinkableTo: true,
+          // curve: go.Link.Bezier,
           fromSpot: go.Spot.RightSide,
           toSpot: go.Spot.LeftSide
         },
+        new go.Binding('fromEndSegmentLength'),
+        new go.Binding('toEndSegmentLength'),
         new go.Binding('routing', 'routing', function (c) {
           return c ? go.Link[c] : go.Link.AvoidsNodes
         }),
@@ -153,7 +159,8 @@ export default {
           return c ? go.Spot[c] : go.Spot.LeftSide
         }),
         $(go.Shape, { strokeWidth: 2 }, new go.Binding('stroke', 'stroke')),
-        $(go.Shape, { toArrow: 'Standard', strokeWidth: 2 }, new go.Binding('stroke', 'stroke'), new go.Binding('fill', 'stroke'))
+        $(go.Shape, { toArrow: 'Standard', strokeWidth: 2 }, new go.Binding('stroke', 'stroke'), new go.Binding('fill', 'stroke')),
+        $(go.TextBlock, new go.Binding('text', 'text'), { segmentIndex: 3, segmentFraction: 0.5 })
       )
       myDiagram.groupTemplate = $(
         go.Group,
@@ -168,7 +175,7 @@ export default {
             {
               parameter1: 12,
               fill: '#F9FBFB',
-              stroke: '#B7B7B7',
+              stroke: '#4f5f82',
               strokeDashArray: [3, 4]
             }
           ),
