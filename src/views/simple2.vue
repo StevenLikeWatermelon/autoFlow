@@ -523,6 +523,7 @@ export default {
               child.background = '#ffffff'
               child.description = ''
               child.textStroke = '#36c2c2'
+              child.strokeWidth = 1
               this.nodeDataArray.push(child)
               this.childNodesLinkArr.push({
                 from: child.number,

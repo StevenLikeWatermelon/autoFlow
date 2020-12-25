@@ -105,10 +105,12 @@ export default {
           $(go.Panel, 'Auto',
             $(go.Shape, 'RoundedRectangle',
               {
-                strokeWidth: 1,
+                strokeWidth: 0,
                 stroke: '#36c2c2'
               },
-              new go.Binding('fill', 'background')),
+              new go.Binding('fill', 'background'),
+              new go.Binding('strokeWidth', 'strokeWidth')
+            ),
             $(
               go.TextBlock,
               {
