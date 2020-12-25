@@ -184,6 +184,11 @@ export default {
                     name: '喷淋泵(备)',
                     index: 2, // 排序序号
                     number: '260P003B' // 编号
+                  },
+                  {
+                    name: '喷淋泵(备1)',
+                    index: 3, // 排序序号
+                    number: '260P003C' // 编号
                   }
                 ]
               },
@@ -491,6 +496,11 @@ export default {
         const childrenDataLength = childrenData.length
         for (let j = 0; j < childrenDataLength; j++) {
           const element = childrenData[j]
+          const nextElement = childrenData[j + 1]
+          let nextHalfWidth = 150 / 2
+          if (nextElement && nextElement.children && nextElement.children.length) {
+            nextHalfWidth = 150 * nextElement.children.length
+          }
           element.pos = `${deviceWidth} ${this.devicePurityHeight}`
           element.group = areaKey
           element.key = element.number
@@ -521,9 +531,9 @@ export default {
                 stroke: '#36c2c2'
               })
             })
-            deviceWidth = deviceWidth + 150 * Math.max(element.children.length, 1.5)
+            deviceWidth = deviceWidth + (150 * Math.max(element.children.length, 1.5) + nextHalfWidth) / 2
           } else {
-            deviceWidth = deviceWidth + 300
+            deviceWidth = deviceWidth + (300 + nextHalfWidth) / 2
           }
         }
         this.allpurityWidth.push(deviceWidth)
@@ -541,7 +551,7 @@ export default {
       const dischargeLength = discharge.length
       this.deviceDischargeHeight = dischargeLength === 1 ? this.deviceProductHeight / 2 - 70 : 0
       for (let i = 0; i < dischargeLength; i++) {
-        let deviceWidth = Math.max(...this.allpurityWidth) + 50
+        let deviceWidth = Math.max(...this.allpurityWidth) + 100
         const background = '#85a5ff'
         const element = discharge[i]
         const areaKey = `dischargeAreaKey${i}`
