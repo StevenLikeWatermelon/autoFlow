@@ -27,6 +27,7 @@ export default {
       nodeDataArray: [],
       linkDataArray: [],
       noRepeatProductLinkArr: [],
+      childNodesLinkArr: [],
       deviceProductHeight: 0,
       devicePurityHeight: 0,
       deviceDischargeHeight: 0,
@@ -94,9 +95,14 @@ export default {
                 // 子节点 可扩展
                 children: [
                   {
-                    name: '鼓风机',
+                    name: '鼓风机(主)',
                     index: 1, // 排序序号
                     number: '160K001' // 编号
+                  },
+                  {
+                    name: '鼓风机(备)',
+                    index: 2, // 排序序号
+                    number: '160K002' // 编号
                   }
                 ]
               },
@@ -172,12 +178,12 @@ export default {
                   {
                     name: '喷淋泵(主)',
                     index: 1, // 排序序号
-                    number: '260P002A' // 编号
+                    number: '260P003A' // 编号
                   },
                   {
                     name: '喷淋泵(备)',
                     index: 2, // 排序序号
-                    number: '260P002B' // 编号
+                    number: '260P003B' // 编号
                   }
                 ]
               },
@@ -191,7 +197,7 @@ export default {
                   {
                     name: '喷淋泵(主)',
                     index: 1, // 排序序号
-                    number: '260P007A' // 编号
+                    number: '260P004A' // 编号
                   },
                   {
                     name: '喷淋泵(备)',
@@ -454,11 +460,21 @@ export default {
       }
     },
     makeNodeDataArrayPurify () {
+      this.childNodesLinkArr = []
       const purify = this.flowData.purify || []
       const purifyLength = purify.length
+      const childrenLengthArr = purify.filter(item => (item.children && item.children.length > 0 && item.children[0] && item.children[0].children && item.children[0].children.length > 0)).map(item => item.children[0].children.length)
+      const maxChildrenLength = Math.max(...childrenLengthArr)
+      let initDeviceWidth = 0
+      if (maxChildrenLength > 1) {
+        initDeviceWidth = 250 * ((maxChildrenLength + 0.5) / 2)
+      } else {
+        initDeviceWidth = 250
+      }
+      // console.log(initDeviceWidth)
       this.devicePurityHeight = purifyLength === 1 ? this.deviceProductHeight / 2 - 70 : 0
       for (let i = 0; i < purifyLength; i++) {
-        let deviceWidth = 220
+        let deviceWidth = initDeviceWidth
         const background = '#16c2c2'
         const element = purify[i]
         const areaKey = `purifyAreaKey${i}`
@@ -476,13 +492,39 @@ export default {
         for (let j = 0; j < childrenDataLength; j++) {
           const element = childrenData[j]
           element.pos = `${deviceWidth} ${this.devicePurityHeight}`
-          deviceWidth = deviceWidth + 200
           element.group = areaKey
           element.key = element.number
           element.text = `${element.name}\n${element.number}`
           element.background = background
           element.description = ''
           this.nodeDataArray.push(element)
+          if (element.children && element.children.length) {
+            const childLength = element.children.length
+            const childrenNode = element.children.sort((prev, next) => {
+              return prev.index - next.index
+            })
+            childrenNode.forEach((child, index) => {
+              const halfIndex = (childLength - 1) / 2
+              const childWidth = (index - halfIndex) * 150
+              child.pos = `${deviceWidth + childWidth} ${this.devicePurityHeight + 80}`
+              child.group = areaKey
+              child.key = child.number
+              child.text = `${child.name}\n${child.number}`
+              child.background = background
+              child.description = ''
+              this.nodeDataArray.push(child)
+              this.childNodesLinkArr.push({
+                from: child.number,
+                to: element.number,
+                fromSpot: 'Top',
+                toSpot: 'Bottom',
+                stroke: '#36c2c2'
+              })
+            })
+            deviceWidth = deviceWidth + 150 * Math.max(element.children.length, 1.5)
+          } else {
+            deviceWidth = deviceWidth + 300
+          }
         }
         this.allpurityWidth.push(deviceWidth)
         if (purifyLength > 1) {
@@ -543,7 +585,6 @@ export default {
       this.noRepeatProductLinkArr.forEach(from => {
         const tempArr = from.split(',')
         const pollutionType = +tempArr.pop()
-        console.log(pollutionType)
         tempArr.forEach(to => {
           this.linkDataArray.push({
             from,
@@ -563,6 +604,7 @@ export default {
         item.stroke = +item.pollutionType === 1 ? '#98c16d' : '#5b9ad5'
       })
       this.linkDataArray.push(...purifyArr)
+      this.linkDataArray = this.linkDataArray.concat(this.childNodesLinkArr)
     }
   }
 }
