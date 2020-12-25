@@ -520,8 +520,9 @@ export default {
               child.group = areaKey
               child.key = child.number
               child.text = `${child.name}\n${child.number}`
-              child.background = background
+              child.background = '#ffffff'
               child.description = ''
+              child.textStroke = '#36c2c2'
               this.nodeDataArray.push(child)
               this.childNodesLinkArr.push({
                 from: child.number,

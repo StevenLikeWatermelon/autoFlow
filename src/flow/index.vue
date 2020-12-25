@@ -104,7 +104,10 @@ export default {
           'Vertical',
           $(go.Panel, 'Auto',
             $(go.Shape, 'RoundedRectangle',
-              { strokeWidth: 0 },
+              {
+                strokeWidth: 1,
+                stroke: '#36c2c2'
+              },
               new go.Binding('fill', 'background')),
             $(
               go.TextBlock,
@@ -123,6 +126,7 @@ export default {
               new go.Binding('width', 'text', function (c) {
                 return autoTextWidth(c)
               }),
+              new go.Binding('stroke', 'textStroke'),
               new go.Binding('background', 'background')
             )
           )
