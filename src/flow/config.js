@@ -1,7 +1,3 @@
-export const defaultColors = {
-  gas: '#98c16d',
-  water: '#5b9ad5'
-}
 // 1表示废水 2表示废气
 export const pollutionType = {
   water: 1,
