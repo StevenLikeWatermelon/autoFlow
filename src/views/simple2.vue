@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { defaultColors } from '../flow/config'
+import { pollutionType, pollutionTypeStroke, pollutionTypeText } from '../flow/config'
 import XlFlow from '../flow/index'
 import XlFlowDis from '../flow/discribe'
 export default {
@@ -302,94 +302,90 @@ export default {
         product: [{
           from: '120K001',
           to: ['160R001', '260ROO1'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         },
         {
           from: '130U001A',
           to: ['160R001', '260ROO1'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         },
         {
           from: '130U001B',
           to: ['160R001', '260ROO1'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         },
         {
           from: '260P001A',
           to: ['260ROO1'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         },
         {
           from: '260P001B',
           to: ['260ROO1'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         },
         {
           from: '260P002A',
           to: ['260ROO1'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         },
         {
           from: '260P002B',
           to: ['260ROO1'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         }],
         purify: [{
           from: '160R001',
           to: ['160C001'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         }, {
           from: '160C001',
           to: ['160C005'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         }, {
           from: '160C005',
           to: ['160PK001'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         }, {
           from: '260ROO1',
           to: ['260C001'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         }, {
           from: '260ROO1',
           to: ['260C001'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         }, {
           from: '260C001',
           to: ['260E003'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         }, {
           from: '260C001',
           to: ['260E003'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         }, {
           from: '260E003',
           to: ['260C004'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         }, {
           from: '260E003',
           to: ['260C004'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         }, {
           from: '260C004',
           to: ['260YF001'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.gas
         }, {
           from: '260C004',
           to: ['260SCR001'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         }, {
           from: '260SCR001',
           to: ['260YF001'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         }, {
           from: '260YF001',
           to: ['260PK001'],
-          pollutionType: 1 // pollutionType: 1表示废水 2表示废气
-        }, {
-          from: '260YF001',
-          to: ['260PK001'],
-          pollutionType: 2 // pollutionType: 1表示废水 2表示废气
+          pollutionType: pollutionType.water
         }]
       }
     }
@@ -612,8 +608,8 @@ export default {
             pollutionType,
             // fromEndSegmentLength: 50,
             toEndSegmentLength: 30 * (index + 1),
-            stroke: pollutionType === 1 ? defaultColors.water : defaultColors.gas,
-            text: pollutionType === 1 ? '废水' : '废气'
+            stroke: pollutionTypeStroke[pollutionType],
+            text: pollutionTypeText[pollutionType]
           })
         })
       })
@@ -622,8 +618,8 @@ export default {
       const purifyArr = this.linkData.purify || []
       purifyArr.forEach(item => {
         item.to = item.to[0]
-        item.stroke = +item.pollutionType === 1 ? '#98c16d' : '#5b9ad5'
-        item.text = +item.pollutionType === 1 ? '废水' : '废气'
+        item.stroke = pollutionTypeStroke[item.pollutionType]
+        item.text = pollutionTypeText[item.pollutionType]
       })
       this.linkDataArray.push(...purifyArr)
       this.linkDataArray = this.linkDataArray.concat(this.childNodesLinkArr)
