@@ -385,6 +385,10 @@ export default {
         }, {
           from: '260YF001',
           to: ['260PK001'],
+          pollutionType: pollutionType.gas
+        }, {
+          from: '260YF001',
+          to: ['260PK001'],
           pollutionType: pollutionType.water
         }]
       }
@@ -616,10 +620,22 @@ export default {
     },
     makePurityLink () {
       const purifyArr = this.linkData.purify || []
+      const discharge = this.flowData.discharge || []
+      const allDischangeDevice = []
+      discharge.forEach(item => {
+        if (item.children && item.children.length) {
+          item.children.forEach(childItem => {
+            allDischangeDevice.push(childItem.number)
+          })
+        }
+      })
       purifyArr.forEach(item => {
         item.to = item.to[0]
         item.stroke = pollutionTypeStroke[item.pollutionType]
         item.text = pollutionTypeText[item.pollutionType]
+        if (allDischangeDevice.includes(item.to)) {
+          item.routing = 'Orthogonal'
+        }
       })
       this.linkDataArray.push(...purifyArr)
       this.linkDataArray = this.linkDataArray.concat(this.childNodesLinkArr)
