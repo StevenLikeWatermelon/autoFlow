@@ -611,7 +611,7 @@ export default {
             fromSpot: 'Right',
             pollutionType,
             // fromEndSegmentLength: 50,
-            toEndSegmentLength: 30 * (index + 1),
+            toEndSegmentLength: 40 * (index + 1),
             stroke: pollutionTypeStroke[pollutionType],
             text: pollutionTypeText[pollutionType]
           })
